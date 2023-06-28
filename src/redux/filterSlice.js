@@ -4,11 +4,9 @@ const filterInitialState = '';
 
 const fiterSlice = createSlice({
   name: 'filter',
-
   initialState: filterInitialState,
-
   reducers: {
-    handleFilter(state, action) {
+    handleFilter(_, action) {
       return action.payload;
     },
   },

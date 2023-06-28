@@ -1,8 +1,20 @@
 import { Form } from './Form';
 import { ContactList } from './ContactList';
 import { Filter } from './Filter';
+import { fetchContacts } from 'redux/operations';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { getError, getIsLoading } from 'redux/selectors';
 
 export function App() {
+  const dispatch = useDispatch();
+  const isLoading = useSelector(getIsLoading);
+  const error = useSelector(getError);
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
+
   return (
     <div
       style={{
@@ -36,6 +48,7 @@ export function App() {
         Contacts
       </h2>
       <Filter />
+      {isLoading && !error && <b>Loading...</b>}
       <ContactList />
     </div>
   );

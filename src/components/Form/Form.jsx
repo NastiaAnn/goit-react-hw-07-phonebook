@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { ContactsForm, FormLabel, FormText, SubmitButton } from './styled';
-import { addContacts } from 'redux/contactsSlice';
+import { addContact } from 'redux/operations';
 import { getContacts } from 'redux/selectors';
 import { useSelector } from 'react-redux';
 
@@ -12,7 +12,7 @@ export function Form() {
     event.preventDefault();
     const form = event.target;
     const name = form.elements.name.value;
-    const number = form.elements.number.value;
+    const phone = form.elements.number.value;
 
     const isDuplicateName = contacts.some(
       contact => contact.name.toLowerCase() === name.toLowerCase()
@@ -24,7 +24,7 @@ export function Form() {
       return;
     }
 
-    dispatch(addContacts({ name, number }));
+    dispatch(addContact({ name, phone }));
     form.reset();
   };
 
